@@ -1,0 +1,65 @@
+---
+title: "Evidencia 1 | Análisis inicial"
+output: html_notebook
+---
+
+<br> Camila Turner Escalante, A01423579 <br>
+Paulina Galindo Rodríguez, A01424818 <br>
+Ramona Nájera Fuentes, A01423596 <br>
+
+***
+
+### INTRODUCCIÓN
+> Situación actual del COVID-19
+
+|  Nivel  |    Casos    |  Muertes  |
+| :----:  |    :----:   |   :----:  |
+| Mundial | 152,506,783 | 2,719,101 |
+| México  |  5,731,635  | 324,033   |
+
+> ¿Qué es el **coronavirus** (CoV)? 
+
+Es una **amplia familia de virus** que pueden causar desde un resfriado común hasta enfermedades más graves. Reciben su nombre porque los picos que sobresalen de su membrana asemejan a la corona del sol. Este nuevo coronavirus, también conocido como **SARS-CoV-2**, no se había detectado antes en un ser humano previo al brote en Wuhan, China en diciembre 2019. \
+Entre sus **síntomas** más comunes encontramos la **fiebre, tos, cansancio, y perdida del gusto o el olfato**. Otros síntomas menos comunes son el **dolor de garganta, dolor de cabeza, dolores y molesias, dificultad para respirar**, entre otros.
+
+Otro concepto importante es el covid-19. Aquí cabe recalcar que el covid-19 no es los mismo que el coronavirus. Mientras que el coronavirus es el virus que causa la infección, el **covid-19 es la enfermedad causada por el virus**. Esta enfermedad afecta a las personas de diferente manera, para algunas puede ser como un resfriado y para otras puede convertirse en una enfermedad respiratoria más grave o incluso causar la muerte.
+
+El **SARS-CoV-2 se transmite principalmente de persona a persona**, pero también se puede contagiar de los animales a los humanos. Cuando una persona inferctada tose, estornuda o habla genera **gotículas respiatorias** (pequeñas partículas de fluidos) **que viajan por el aire junto con el virus**. Dichas gotitas pueden llega a la nariz o boca de alguna persona cercana y llegar hasta los pulmones al respirar. De igual forma si el virus se encuenta sobre una supericie u objeto, al tocarlos el virus se puede quedar en las manos y si la persona se toca la nariz, boca y posiblemente los ojos con esa misma mano puede resultar infectado.
+
+***
+
+### PROPUESTA
+El objetivo principal de este proyecto es **analizar al virus SARS-Cov-2 y sus mutaciones** para obtener información al respecto. Nosotras pretendemos comparar la secuencia original de Wuhan con países representativos de cada continente para identificar las mutaciones que predominan en el gen S dependiendo del área geográfica.
+
+***
+
+### PROYECTO
+<br>
+**LIBRERÍAS**
+  
+  1. seqinr: Biological Sequences Retrieval and Analysis <br>
+  2. ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics
+```{r}
+#install.packages("seqinr")
+#install.packages("ggplot2")
+
+library(seqinr)
+library(ggplot2)
+```
+
+**PASO 1**: Extraer las secuencias de ADN de la espícula y convertirlas a ARN mensajero
+```{r}
+original = read.fasta("Original_sequence_045512.txt")
+ADNoriginal = toupper( original[[3]] )
+ARNoriginal[ARNoriginal == "T"] = "U"
+
+# DECIDIR QUÉ PAÍS TOMAR EN CUENTA
+# México, China (original), Italia, India, Brasil, EUA, Fancia
+```
+
+***
+### Referencias
+* [item1](https://www.paho.org/es/temas/coronavirus)
+* [item2](https://www.who.int/es/health-topics/coronavirus#tab=tab_3)
+* [item3](https://www.nytimes.com/es/article/el-coronavirus-que-es.html)
+* [item4](https://www.rtve.es/noticias/20210607/se-sabe-del-nuevo-coronavirus-china/1996067.shtml)
