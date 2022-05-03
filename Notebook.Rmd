@@ -31,6 +31,9 @@ El **SARS-CoV-2 se transmite principalmente de persona a persona**, pero tambié
 ### PROPUESTA
 El objetivo principal de este proyecto es **analizar al virus SARS-Cov-2 y sus mutaciones** para obtener información al respecto. Nosotras pretendemos comparar la secuencia original de Wuhan con países representativos de cada continente para identificar las mutaciones que predominan en el gen S dependiendo del área geográfica.
 
+### HIPÓTESIS
+Las mutaciones más comunes van a cambiar dependiendo de la región geográfica
+
 ***
 
 ### PROYECTO
