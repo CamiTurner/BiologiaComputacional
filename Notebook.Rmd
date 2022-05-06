@@ -234,8 +234,8 @@ Efectivamente, como lo planteamos en nuestra hipótesis, las mutaciones que pres
 
 ***
 ### Referencias
-* [item1](https://www.paho.org/es/temas/coronavirus)
-* [item2](https://www.who.int/es/health-topics/coronavirus#tab=tab_3)
-* [item3](https://www.nytimes.com/es/article/el-coronavirus-que-es.html)
-* [item4](https://www.rtve.es/noticias/20210607/se-sabe-del-nuevo-coronavirus-china/1996067.shtml)
-* [item5](https://www.genome.gov/es/genetics-glossary/Mutacion#:~:text=Una%20mutaci%C3%B3n%20es%20un%20cambio,mut%C3%A1genos%2C%20o%20infecci%C3%B3n%20por%20virus.)
+* [Coronavirus - OPS/OMS | Organización Panamericana de la Salud. (2018). Paho.org. https://www.paho.org/es/temas/coronavirus](https://www.paho.org/es/temas/coronavirus)
+* [World. (2020, January 10). Coronavirus. Who.int; World Health Organization: WHO. https://www.who.int/es/health-topics/coronavirus#tab=tab_3](https://www.who.int/es/health-topics/coronavirus#tab=tab_3)
+* [Coronavirus: qué es y lo que los científicos saben hasta ahora. (2022). The New York Times. https://www.nytimes.com/es/article/el-coronavirus-que-es.html](https://www.nytimes.com/es/article/el-coronavirus-que-es.html)
+* [RTVE.es. (2021). Qué es el nuevo coronavirus o la COVID-19 l RTVE. RTVE.es. https://doi.org/1996067](https://www.rtve.es/noticias/20210607/se-sabe-del-nuevo-coronavirus-china/1996067.shtml)
+* [Mutación | NHGRI. (2022). Genome.gov. https://www.genome.gov/es/genetics-glossary/Mutacion#:~:text=Una%20mutaci%C3%B3n%20es%20un%20cambio,mut%C3%A1genos%2C%20o%20infecci%C3%B3n%20por%20virus.](https://www.genome.gov/es/genetics-glossary/Mutacion#:~:text=Una%20mutaci%C3%B3n%20es%20un%20cambio,mut%C3%A1genos%2C%20o%20infecci%C3%B3n%20por%20virus.)
