@@ -243,6 +243,9 @@ Tal como lo planteamos en nuestra hipótesis, las mutaciones que presenta el vir
 Sin embargo, las diferencias son mínimas ya que, como los gráficos lo indican, las mutaciones AtoG, AtoU y GtoA predominan en cada continente. Ahora bien, gracias al análisis que realizamos, pudimos percatarnos de que América presenta una cantidad significativamente menor de mutaciones a comparación del resto de los continentes, algo sumamente sorprendente debido a que usamos la misma cantidad de registros por región. <br>
 Esto es interesante porque podría ser un indicador de que efectivamente la región geográfica es un factor determinante en la presencia de mutaciones dentro del gen S. Por ello, consideramos que sería significativo repetir este análisis con más registros para validar la veracidad el descubrimiento que hemos visto en este primer análisis.
 
+***
+En el siguiente mapa podemos observar cómo se han desarrollado las diferentes variantes del SARS-CoV-2 en los países (qué tan comunes fueron). Abajo de la gráfica hay un link que puedes visitar para obtener más información respecto al mapa y otros datos.
+
 ![GISAID - NextStrain, 2022](Map_mutations.png)
 [Link para interactuar con el mapa](https://www.gisaid.org/phylodynamics/global/nextstrain/)
 
