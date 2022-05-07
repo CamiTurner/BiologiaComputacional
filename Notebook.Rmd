@@ -46,25 +46,29 @@ Nuestra hipótesis es que las mutaciones que encontremos entre el genoma origina
 
 ***
 
-### PROYECTO
+### DESARROLLO DEL PROYECTO
 
 ```{r}
 rm(list=ls()) # Limpiar environment
 cat("\014") # Limpiar consola
 ```
+
 <br>**LIBRERÍAS**
   
   1. seqinr: Biological Sequences Retrieval and Analysis <br>
-  2. ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics
+  2. ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics <br>
+  3. reshape: Flexibly Reshape Data: A Reboot of the Reshape Package
 ```{r}
 #install.packages("seqinr")
 #install.packages("ggplot2")
+#install.packages("reshape2")
 
 library(seqinr)
 library(ggplot2)
+library(reshape2)
 ```
 
-<br>**PASO 1**: Declaración
+<br>**PASO 1**: Declaración del diccionario que clasificar las mutaciones, la función que compara codones y el dataframe que contendrá la información recopilada
 ```{r}
 codonAamino = c(GAC="D",GAU="D", GAA="E",GAG="E", CGA="R",CGC="R",CGG="R",
                 CGU="R",AGA="R",AGG="R", AAA="K",AAG="K", AAC="N",AAU="N", 
@@ -77,7 +81,7 @@ codonAamino = c(GAC="D",GAU="D", GAA="E",GAG="E", CGA="R",CGC="R",CGG="R",
                 AUU="I", AUG="M", UGG="W", UGC="C",UGU="C", UAA="STOP",
                 UAG="STOP",UGA="STOP")
 
-# Encuentre la mutación dentro de un codón
+# Detecta la mutación dentro de un codón
 diferencia = function(codonO, codonS){
   for(i in seq(1, 3, 1)){
     if(substr(codonO,i,i) != substr(codonS,i,i)){
@@ -96,14 +100,19 @@ dataFrame = data.frame( # E.g. CtoA 1433 ACAtoAAA TtoK 478 AS
 )
 ```
 
-<br>**PASO 2**: Extraer las secuencia original de ADN y convertirla a ARN
+<br>**PASO 2**: Extraer la secuencia original de ADN (Wuhan) y convertirla a ARN
 ```{r}
 original = read.fasta("Original_sequence_045512.txt") 
 original = toupper( original[[3]] )
 original[original == "T"] = "U"
 ```
 
-<br>**PASO 3**: Comparación con los registros recopilados
+<br>**PASO 3**: Comparación con los registros recopilados <br>
+<br>Características generales de los registros utilizados: <br>
+- VIRUS: Sars-CoV-2 <br>
+- NUCLEOTIDE COMPLETENESS: complete <br>
+- GEOGRAPHIC REGION: 10 registros por continente
+
 ```{r}
 secuencias = list.files(path="./Secuencias", pattern=".txt", all.files=TRUE, full.names=TRUE)
 cantMutaciones = 1
@@ -216,18 +225,23 @@ frecuencia
 ```
 
 ```{r}
-#mutaciones = table(dataFrame$mutation, dataFrame$region); mutaciones
-mutaciones = as.data.frame.matrix( table(dataFrame$mutation, dataFrame$region) )
-head(mutaciones)
+mut = table(dataFrame$mutation, dataFrame$region)
+mut
+```
+
+```{r}
+mutaciones = melt(mut)
+colnames(mutaciones) = c("Mutation", "Region", "Value")
+mutaciones
 ```
 ```{r}
-###ggplot(mutaciones, aes(x=colnames(mutaciones), y=rownames(mutaciones))) + geom_line()
-#ggplot(dataFrame) + geom_point(mapping = aes(x = region, y = mutation, color = mutation, size=index))#, size = mutaciones[mutation, region]))
-#ggplot(dataFrame,aes(x=region, y=mutation))+geom_point(aes(size=mutaciones[mutation, region]))
+ggplot(mutaciones, aes(Mutation, Value, group = factor(Region))) + geom_point(aes(color = factor(Region), size = Value))
 ```
 
 ### CONCLUSIONES
-Efectivamente, como lo planteamos en nuestra hipótesis, las mutaciones que presenta el virus SARS-CoV-2 cambian dependiendo de la región geográfica. Hay casos en los que cierta mutación es más común en más de un continente, por otro lado, hay otros casos en los que solo un continente presenta cierto tipo de mutación. Por ejemplo, hubo un caso que una mutación se presentó solamente en Oceanía.
+Tal como lo planteamos en nuestra hipótesis, las mutaciones que presenta el virus SARS-CoV-2 cambian dependiendo de la región geográfica, pues existen casos en los que cierta mutación abunda en todos los continentes y otras en los que se limita a una región en particular. <br>
+Sin embargo, las diferencias son mínimas ya que, como los gráficos lo indican, las mutaciones AtoG, AtoU y GtoA predominan en cada continente. Ahora bien, gracias al análisis que realizamos, pudimos percatarnos de que América presenta una cantidad significativamente menor de mutaciones a comparación del resto de los continentes, algo sumamente sorprendente debido a que usamos la misma cantidad de registros por región. <br>
+Esto es interesante porque podría ser un indicador de que efectivamente la región geográfica es un factor determinante en la presencia de mutaciones dentro del gen S. Por ello, consideramos que sería significativo repetir este análisis con más registros para validar la veracidad el descubrimiento que hemos visto en este primer análisis.
 
 ![GISAID - NextStrain, 2022](Map_mutations.png)
 [Link para interactuar con el mapa](https://www.gisaid.org/phylodynamics/global/nextstrain/)
@@ -235,7 +249,7 @@ Efectivamente, como lo planteamos en nuestra hipótesis, las mutaciones que pres
 ***
 ### Referencias
 * [Coronavirus - OPS/OMS | Organización Panamericana de la Salud. (2018). Paho.org. https://www.paho.org/es/temas/coronavirus](https://www.paho.org/es/temas/coronavirus)
-* [World. (2020, January 10). Coronavirus. Who.int; World Health Organization: WHO. https://www.who.int/es/health-topics/coronavirus#tab=tab_3](https://www.who.int/es/health-topics/coronavirus#tab=tab_3)
 * [Coronavirus: qué es y lo que los científicos saben hasta ahora. (2022). The New York Times. https://www.nytimes.com/es/article/el-coronavirus-que-es.html](https://www.nytimes.com/es/article/el-coronavirus-que-es.html)
-* [RTVE.es. (2021). Qué es el nuevo coronavirus o la COVID-19 l RTVE. RTVE.es. https://doi.org/1996067](https://www.rtve.es/noticias/20210607/se-sabe-del-nuevo-coronavirus-china/1996067.shtml)
 * [Mutación | NHGRI. (2022). Genome.gov. https://www.genome.gov/es/genetics-glossary/Mutacion#:~:text=Una%20mutaci%C3%B3n%20es%20un%20cambio,mut%C3%A1genos%2C%20o%20infecci%C3%B3n%20por%20virus.](https://www.genome.gov/es/genetics-glossary/Mutacion#:~:text=Una%20mutaci%C3%B3n%20es%20un%20cambio,mut%C3%A1genos%2C%20o%20infecci%C3%B3n%20por%20virus.)
+* [RTVE.es. (2021). Qué es el nuevo coronavirus o la COVID-19 l RTVE. RTVE.es. https://doi.org/1996067](https://www.rtve.es/noticias/20210607/se-sabe-del-nuevo-coronavirus-china/1996067.shtml)
+* [World. (2020, January 10). Coronavirus. Who.int; World Health Organization: WHO. https://www.who.int/es/health-topics/coronavirus#tab=tab_3](https://www.who.int/es/health-topics/coronavirus#tab=tab_3)
